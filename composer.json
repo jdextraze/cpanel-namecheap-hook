@@ -1,0 +1,15 @@
+{
+  "name": "jdextraze/cpanel-namecheap-hook",
+  "description": "Cpanel NameCheap hook",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Jonathan Dextraze",
+      "email": "jonathan.dextraze@dexdo.com"
+    }
+  ],
+  "require": {
+    "karazieiev/namecheap-php-sdk": "v0.2.0"
+  }
+}
