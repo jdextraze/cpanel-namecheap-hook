@@ -4,6 +4,7 @@ define('BASE_PATH', dirname(__FILE__));
 
 require_once(BASE_PATH . '/config.php');
 require_once(BASE_PATH . '/vendor/autoload.php');
+require_once('/usr/local/cpanel/php/cpanel.php');
 
 foreach($argv as $arg)
 {
@@ -18,7 +19,7 @@ foreach($argv as $arg)
         if (function_exists($action))
         {
             $input_data = get_passed_data();
-            list($status, $msg) = call_user_func($action, $input_data);
+            list($status, $msg) = call_user_func($action, $input_data['data']['args']);
             echo "$status $msg";
             exit;
         }
@@ -65,28 +66,49 @@ function describe()
     return array($add_zone_record, $remove_zone_record);
 }
 
-function add_zone_record($input_data)
+function add_zone_record($args)
 {
     global $config;
 
+    /**
+     * @var string $cache_fix
+     * @var string $domain
+     * @var string $name
+     * @var string $type
+     * @var string $address
+     * @var string $ttl
+     * @var string $class
+     */
+    extract($args);
+
     try
     {
+        $cpanel = new CPANEL();
+        $fetch_zone = $cpanel->api2(
+            'ZoneRecord', 'fetchzone',
+            array(
+                'domain' => $domain,
+            )
+        );
+        error_log('Cpanel::Api2::ZoneRecord::fetchzone : ' . print_r($fetch_zone, true));
+
         $cfg = new \Namecheap\Config($config);
 
         /** @var Namecheap\Command\Domains\Dns\GetHosts $dnsGetHosts */
         $dnsGetHosts = Namecheap\Api::factory($cfg, 'domains.dns.getHosts');
-        $dnsGetHosts->domainName($input_data['data']['args']['domain']);
+        $dnsGetHosts->domainName($domain);
         $dnsGetHosts->dispatch();
 
         /** @var Namecheap\Command\Domains\Dns\SetHosts $dnsSetHosts */
         $dnsSetHosts = Namecheap\Api::factory($cfg, 'domains.dns.setHosts');
         $dnsSetHosts->hosts($dnsGetHosts->hosts());
-        $dnsSetHosts->domainName($input_data['data']['args']['domain']);
+        $dnsSetHosts->domainName($domain);
+        $host = substr($name, 0, strpos($name, $domain) - 1);
         $record = (new \Namecheap\DnsRecord())
-            ->setHost($input_data['data']['args']['name'])
-            ->setType($input_data['data']['args']['type'])
-            ->setData($input_data['data']['args']['address'])
-            ->setTtl($input_data['data']['args']['ttl']);
+            ->setHost($host)
+            ->setType($type)
+            ->setData($address)
+            ->setTtl($ttl);
         $dnsSetHosts->addHost($record);
         $dnsSetHosts->dispatch();
 
