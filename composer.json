@@ -9,7 +9,13 @@
       "email": "jonathan.dextraze@dexdo.com"
     }
   ],
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/jdextraze/namecheap-php-sdk"
+    }
+  ],
   "require": {
-    "karazieiev/namecheap-php-sdk": "v0.2.0"
+    "karazieiev/namecheap-php-sdk": "dev-fix-dns-record-address"
   }
 }

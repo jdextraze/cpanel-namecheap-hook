@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d3960043674237b4127817ef84e76805",
+    "hash": "72e45ec9e811932c4c38486e20454286",
     "packages": [
         {
             "name": "karazieiev/namecheap-php-sdk",
-            "version": "v0.2.0",
+            "version": "dev-fix-dns-record-address",
             "source": {
                 "type": "git",
-                "url": "https://github.com/speedster-kiev/namecheap-php-sdk.git",
-                "reference": "37adee240122312f6c8d0c5385ad23fc661cfab2"
+                "url": "https://github.com/jdextraze/namecheap-php-sdk.git",
+                "reference": "098f07d2eb4158c7beb75cd63bfcb37984c9d6dd"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/speedster-kiev/namecheap-php-sdk/zipball/37adee240122312f6c8d0c5385ad23fc661cfab2",
-                "reference": "37adee240122312f6c8d0c5385ad23fc661cfab2",
+                "url": "https://api.github.com/repos/jdextraze/namecheap-php-sdk/zipball/098f07d2eb4158c7beb75cd63bfcb37984c9d6dd",
+                "reference": "098f07d2eb4158c7beb75cd63bfcb37984c9d6dd",
                 "shasum": ""
             },
             "require": {
@@ -29,7 +29,6 @@
                     "Namecheap\\": "src"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "Apache-2.0"
             ],
@@ -37,6 +36,7 @@
                 {
                     "name": "Maksym Karazieiev",
                     "email": "mkarazeev@gmail.com",
+                    "homepage": "",
                     "role": "Developer"
                 }
             ],
@@ -46,13 +46,18 @@
                 "api",
                 "namecheap"
             ],
-            "time": "2015-05-14 13:11:12"
+            "support": {
+                "source": "https://github.com/jdextraze/namecheap-php-sdk/tree/fix-dns-record-address"
+            },
+            "time": "2015-05-31 02:28:25"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "karazieiev/namecheap-php-sdk": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
