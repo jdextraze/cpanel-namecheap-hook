@@ -4,7 +4,6 @@ define('BASE_PATH', dirname(__FILE__));
 
 require_once(BASE_PATH . '/config.php');
 require_once(BASE_PATH . '/vendor/autoload.php');
-require_once('/usr/local/cpanel/php/cpanel.php');
 
 foreach($argv as $arg)
 {
@@ -83,15 +82,6 @@ function add_zone_record($args)
 
     try
     {
-        $cpanel = new CPANEL();
-        $fetch_zone = $cpanel->api2(
-            'ZoneRecord', 'fetchzone',
-            array(
-                'domain' => $domain,
-            )
-        );
-        error_log('Cpanel::Api2::ZoneRecord::fetchzone : ' . print_r($fetch_zone, true));
-
         $cfg = new \Namecheap\Config($config);
 
         /** @var Namecheap\Command\Domains\Dns\GetHosts $dnsGetHosts */
