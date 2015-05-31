@@ -97,7 +97,7 @@ function add_zone_record($args)
         $record = (new \Namecheap\DnsRecord())
             ->setHost($host)
             ->setType($type)
-            ->setData($address)
+            ->setAddress($address)
             ->setTtl($ttl);
         $dnsSetHosts->addHost($record);
         $dnsSetHosts->dispatch();
